@@ -4,13 +4,19 @@
 
 // setPrice(item: Object, price: Number) => item: Object
 var setPrice = function setPrice(item, price) {
-  return Object.assign(item, { price: price });
+  return {
+    name: item.name,
+    price: price
+  }
+  // return Object.assign(item, { price: price });
 };
 
 // addToCart(cart: Array, item: Object) => cart: Array
 var addToCart = function addToCart(cart, item) {
-  cart.push(item);
-  return cart;
+  const newCart = cart.map((item) => item)
+  newCart.push(item);
+  
+  return newCart;
 };
 
 test('setPrice()', function (assert) {
@@ -29,8 +35,8 @@ test('setPrice()', function (assert) {
     price: 50
   };
 
-  assert.deepEqual(actual, expected, msg);
-  assert.deepEqual(item, copy, immutable);
+  assert.deepEqual(actual, expected, msg); // Test for the value
+  assert.deepEqual(item, copy, immutable); // Test for immutability
   assert.end();
 });
 
